@@ -7,3 +7,9 @@
 
 ![](https://github.com/shamy1st/sql/blob/main/images/dbms.png)
 
+## Retrieving Data From a Single Table
+
+### SELECT
+
+
+
