@@ -65,3 +65,19 @@ LIKE     | Search for a pattern
        SELECT * FROM customers
        WHERE birth_date BETWEEN '1990-01-01' AND '2000-01-01';
 
+* **LIKE**
+       * **%** : percent sign represents zero, one, or multiple characters.
+       * **\_** : underscore represents a single character.
+
+
+
+
+
+
+
+
+
+
+
+
+
