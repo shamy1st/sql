@@ -66,12 +66,17 @@ LIKE     | Search for a pattern
        WHERE birth_date BETWEEN '1990-01-01' AND '2000-01-01';
 
 * **LIKE**
-    * **%** : percent sign represents zero, one, or multiple characters.
-    * **\_** : underscore represents a single character.
+    * **%** : represents zero, one, or multiple characters.
+    * **\_** : represents a single character.
 
+              SELECT * FROM customers
+              WHERE last_name LIKE 'b%';
 
+              SELECT * FROM customers
+              WHERE last_name LIKE 'b____y';
 
-
+              SELECT * FROM customers
+              WHERE phone NOT LIKE '%9';
 
 
 
