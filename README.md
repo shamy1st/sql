@@ -145,7 +145,7 @@ LIKE     | Search for a pattern
 
 ## Retrieving Data From Multiple Tables
 
-## Joins
+### Joins
 ![](https://github.com/shamy1st/sql/blob/main/images/joins.png)
 
 * **(INNER) JOIN**: Returns records that have matching values in both tables
@@ -153,10 +153,10 @@ LIKE     | Search for a pattern
 * **RIGHT (OUTER) JOIN**: Returns all records from the right table, and the matched records from the left table
 * **FULL (OUTER) JOIN**: Returns all records when there is a match in either left or right table
 
-## Inner Joins
+### Inner Joins
 ![](https://github.com/shamy1st/sql/blob/main/images/inner-join.png)
 
-* **JOIN = INNER JOIN**, INNER keyword is optional
+* **INNER JOIN**: INNER keyword is optional, you can write only **JOIN**
 
        SELECT order_id, o.customer_id, first_name, last_name
        FROM orders o
@@ -168,10 +168,14 @@ LIKE     | Search for a pattern
        JOIN products p
        ON i.product_id = p.product_id;
 
-## 
+### Joining Across Databases
 
+       SELECT *
+       FROM sql_store.order_items i
+       JOIN sql_inventory.products p
+       ON i.product_id = p.product_id;
 
-
+### 
 
 
 
