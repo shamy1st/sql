@@ -26,9 +26,9 @@ SELECT DISTINCT state FROM customers;
 Operator | Description
 ---------|------------
 =        | Equal 	
->        | Greater than 	
+\>        | Greater than 	
 <        | Less than 	
->=       | Greater than or equal 	
+\>=       | Greater than or equal 	
 <=       | Less than or equal 	
 <>       | Not equal. Note: In some versions of SQL this operator may be written as != 	
 IN       | To specify multiple possible values for a column
