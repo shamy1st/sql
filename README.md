@@ -78,6 +78,29 @@ LIKE     | Search for a pattern
               SELECT * FROM customers
               WHERE phone NOT LIKE '%9';
 
+* **REQEXP**
+
+       -- last_name contains "field"
+       SELECT * FROM customers
+       -- WHERE last_name LIKE '%field%';
+       WHERE last_name REGEXP 'field';
+
+       -- last name starts with "brush"
+       SELECT * FROM customers
+       WHERE last_name REGEXP '^brush';
+
+       -- matches last name contains "ge" or "ie" or "me"
+       SELECT * FROM customers
+       WHERE last_name REGEXP '[gim]e';
+
+       -- last name contains "ae" or "be" or ... "he"
+       SELECT * FROM customers
+       WHERE last_name REGEXP '[a-h]e';
+
+
+
+
+
 
 
 
