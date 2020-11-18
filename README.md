@@ -145,9 +145,27 @@ LIKE     | Search for a pattern
 
 ## Retrieving Data From Multiple Tables
 
+## Joins
+
+* **(INNER) JOIN**: Returns records that have matching values in both tables
+* **LEFT (OUTER) JOIN**: Returns all records from the left table, and the matched records from the right table
+* **RIGHT (OUTER) JOIN**: Returns all records from the right table, and the matched records from the left table
+* **FULL (OUTER) JOIN**: Returns all records when there is a match in either left or right table
+
 ## Inner Joins
+![](https://github.com/shamy1st/sql/blob/main/images/inner-join.png)
 
+* **JOIN = INNER JOIN**, INNER keyword is optional
 
+       SELECT order_id, o.customer_id, first_name, last_name
+       FROM orders o
+       JOIN customers c
+       ON o.customer_id = c.customer_id;
+
+       SELECT i.order_id, p.name, i.quantity, i.unit_price
+       FROM order_items i
+       JOIN products p
+       ON i.product_id = p.product_id;
 
 ## 
 
