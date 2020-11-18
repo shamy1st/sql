@@ -97,14 +97,51 @@ LIKE     | Search for a pattern
        SELECT * FROM customers
        WHERE last_name REGEXP '[a-h]e';
 
+* **IS NULL**
 
+       SELECT * FROM customers
+       WHERE phone IS NULL;
 
+       SELECT * FROM customers
+       WHERE phone IS NOT NULL;
 
+* **ORDER BY**
 
+       SELECT * FROM customers
+       ORDER BY first_name;
 
+       SELECT * FROM customers
+       ORDER BY first_name DESC;
 
+       -- sort by state then first name
+       SELECT * FROM customers
+       ORDER BY state, first_name;
 
+       -- order items for order=2 sorted by total price desc
+       SELECT * , quantity * unit_price AS total_price 
+       FROM order_items
+       WHERE order_id = 2
+       ORDER BY quantity * unit_price DESC;
 
+       SELECT * , quantity * unit_price AS total_price 
+       FROM order_items
+       WHERE order_id = 2
+       ORDER BY total_price DESC;
+
+* **LIMIT**
+
+       -- return only first 3 records
+       SELECT * FROM customers
+       LIMIT 3;
+
+       -- skip first 6 records then get 3 records
+       SELECT * FROM customers
+       LIMIT 6, 3;
+
+       -- top 3 customers points
+       SELECT * FROM customers
+       ORDER BY points DESC
+       LIMIT 3;
 
 
 
