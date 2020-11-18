@@ -149,14 +149,14 @@ LIKE     | Search for a pattern
 ![](https://github.com/shamy1st/sql/blob/main/images/joins.png)
 
 * **(INNER) JOIN**: Returns records that have matching values in both tables
-* **LEFT (OUTER) JOIN**: Returns all records from the left table, and the matched records from the right table
-* **RIGHT (OUTER) JOIN**: Returns all records from the right table, and the matched records from the left table
-* **FULL (OUTER) JOIN**: Returns all records when there is a match in either left or right table
+* **(OUTER) LEFT JOIN**: Returns all records from the left table, and the matched records from the right table
+* **(OUTER) RIGHT JOIN**: Returns all records from the right table, and the matched records from the left table
+* **(OUTER) FULL JOIN**: Returns all records when there is a match in either left or right table
 
-### Inner Joins
+### INNER JOIN
 ![](https://github.com/shamy1st/sql/blob/main/images/inner-join.png)
 
-* **INNER JOIN**: INNER keyword is optional, you can write only **JOIN**
+* INNER keyword is optional, you can write only **JOIN**
 
        SELECT order_id, o.customer_id, first_name, last_name
        FROM orders o
@@ -175,7 +175,72 @@ LIKE     | Search for a pattern
        JOIN sql_inventory.products p
        ON i.product_id = p.product_id;
 
-### 
+### Self Join
+
+       SELECT e.employee_id, e.first_name, m.first_name AS manager
+       FROM sql_hr.employees e
+       JOIN sql_hr.employees m
+       ON e.reports_to = m.employee_id;
+
+### Join More Than Two Tables
+
+       SELECT o.order_id, o.order_date, c.first_name, c.last_name, s.name AS status
+       FROM orders o
+       JOIN customers c ON o.customer_id = c.customer_id
+       JOIN order_statuses s ON o.status = s.order_status_id;
+
+### Compound Join Conditions
+
+       SELECT * 
+       FROM order_items i
+       JOIN order_item_notes n
+       ON i.order_id = n.order_id AND i.product_id = n.product_id;
+
+### Implicit Join Syntax
+* it is better not to use implicit syntax, because you may forget the where condition and make **cross join** instead!
+
+       SELECT *
+       FROM orders o, customers c
+       WHERE o.customer_id = c.customer_id;
+
+       -- same as
+
+       SELECT *
+       FROM orders o
+       JOIN customers c
+       ON o.customer_id = c.customer_id;
+
+### OUTER JOIN
+
+* **LEFT JOIN** return all records from left table, regardless the condition is true or not.
+
+       SELECT c.customer_id, c.first_name, o.order_id
+       FROM customers c
+       LEFT JOIN orders o
+       ON o.customer_id = c.customer_id;
+
+### Outer Join Between More Than Two Tables
+
+       SELECT c.customer_id, c.first_name, o.order_id, s.name AS shipper
+       FROM customers c
+       LEFT JOIN orders o ON o.customer_id = c.customer_id
+       LEFT JOIN shippers s ON o.shipper_id = s.shipper_id;
+
+       SELECT o.order_date, o.order_id, c.first_name AS customer, sh.name AS shipper, s.name AS status
+       FROM orders o
+       LEFT JOIN customers c ON o.customer_id = c.customer_id
+       LEFT JOIN shippers sh ON o.shipper_id = sh.shipper_id
+       LEFT JOIN order_statuses s ON o.status = s.order_status_id
+       ORDER BY status;
+
+
+
+
+
+
+
+
+
 
 
 
