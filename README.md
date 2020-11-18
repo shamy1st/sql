@@ -23,6 +23,18 @@ SELECT DISTINCT state FROM customers;
 
 ### WHERE
 
+Operator | Description
+---------|------------
+=        | Equal 	
+>        | Greater than 	
+<        | Less than 	
+>=       | Greater than or equal 	
+<=       | Less than or equal 	
+<>       | Not equal. Note: In some versions of SQL this operator may be written as != 	
+IN       | To specify multiple possible values for a column
+BETWEEN  | Between a certain range 	
+LIKE     | Search for a pattern 	
+
 SELECT * FROM customers
 WHERE birth_date > '1990-01-01';
 
@@ -36,6 +48,13 @@ WHERE order_id = 6 AND unit_price * quantity > 10;
 
 * **IN**
 
+SELECT * FROM customers
+WHERE state IN ('VA', 'FL', 'GA');
+
+SELECT * FROM customers
+WHERE state NOT IN ('VA', 'FL', 'GA');
+
+* **BETWEEN**
 
 
 
