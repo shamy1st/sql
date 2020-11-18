@@ -143,6 +143,25 @@ LIKE     | Search for a pattern
        ORDER BY points DESC
        LIMIT 3;
 
+## Retrieving Data From Multiple Tables
+
+## Inner Joins
+
+
+
+## 
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
