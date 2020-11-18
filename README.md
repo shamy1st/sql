@@ -146,6 +146,7 @@ LIKE     | Search for a pattern
 ## Retrieving Data From Multiple Tables
 
 ## Joins
+![](https://github.com/shamy1st/sql/blob/main/images/joins.png)
 
 * **(INNER) JOIN**: Returns records that have matching values in both tables
 * **LEFT (OUTER) JOIN**: Returns all records from the left table, and the matched records from the right table
