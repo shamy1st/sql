@@ -11,56 +11,53 @@
 
 ### SELECT
 
-SELECT * FROM customers;
+       SELECT * FROM customers;
 
-SELECT first_name, 
-       last_name, 
-       points, 
-       (points + 10) * 100 AS 'discount factor'
-FROM customers;
+       SELECT first_name, 
+              last_name, 
+              points, 
+              (points + 10) * 100 AS 'discount factor'
+       FROM customers;
 
-SELECT DISTINCT state FROM customers;
+       SELECT DISTINCT state FROM customers;
 
 ### WHERE
 
 Operator | Description
 ---------|------------
 =        | Equal 	
-\>        | Greater than 	
+\>       | Greater than 	
 <        | Less than 	
-\>=       | Greater than or equal 	
+\>=      | Greater than or equal 	
 <=       | Less than or equal 	
 <>       | Not equal. Note: In some versions of SQL this operator may be written as != 	
 IN       | To specify multiple possible values for a column
 BETWEEN  | Between a certain range 	
 LIKE     | Search for a pattern 	
 
-SELECT * FROM customers
-WHERE birth_date > '1990-01-01';
+       SELECT * FROM customers
+       WHERE birth_date > '1990-01-01';
 
 * **AND, OR, NOT**
 
-SELECT * FROM customers
-WHERE NOT birth_date > '1990-01-01' OR (points > 1000 AND state = 'VA');
+       SELECT * FROM customers
+       WHERE NOT birth_date > '1990-01-01' OR (points > 1000 AND state = 'VA');
 
-SELECT * FROM order_items
-WHERE order_id = 6 AND unit_price * quantity > 10;
+       SELECT * FROM order_items
+       WHERE order_id = 6 AND unit_price * quantity > 10;
 
 * **IN**
 
-SELECT * FROM customers
-WHERE state IN ('VA', 'FL', 'GA');
+       SELECT * FROM customers
+       WHERE state IN ('VA', 'FL', 'GA');
 
-SELECT * FROM customers
-WHERE state NOT IN ('VA', 'FL', 'GA');
+       SELECT * FROM customers
+       WHERE state NOT IN ('VA', 'FL', 'GA');
 
 * **BETWEEN**
 
-SELECT * FROM customers
-
--- WHERE points >= 1000 AND points <= 3000;
-
-WHERE points BETWEEN 1000 AND 3000;
+       SELECT * FROM customers
+       WHERE points BETWEEN 1000 AND 3000;
 
 
 
