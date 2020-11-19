@@ -190,6 +190,7 @@ LIKE     | Search for a pattern
        JOIN order_statuses s ON o.status = s.order_status_id;
 
 ### Compound Join Conditions
+* tables with two primary keys
 
        SELECT * 
        FROM order_items i
@@ -232,6 +233,81 @@ LIKE     | Search for a pattern
        LEFT JOIN shippers sh ON o.shipper_id = sh.shipper_id
        LEFT JOIN order_statuses s ON o.status = s.order_status_id
        ORDER BY status;
+
+### Self Outer Joins
+
+       -- return the manager with employees and null manager
+       SELECT e.employee_id, e.first_name, m.first_name AS manager
+       FROM sql_hr.employees e
+       LEFT JOIN sql_hr.employees m
+       ON e.reports_to = m.employee_id;
+
+### USING Clause
+* if the joining column is the same name as primary key column, you can use **USING** clause.
+
+       SELECT o.order_id, c.first_name
+       FROM orders o
+       JOIN customers c
+       USING(customer_id);
+       
+       -- same as
+
+       SELECT o.order_id, c.first_name
+       FROM orders o
+       JOIN customers c
+       ON o.customer_id = c.customer_id;
+
+* **with two primary keys**
+
+       SELECT * 
+       FROM order_items i
+       JOIN order_item_notes n
+       USING(order_id, product_id);
+
+       -- same as
+
+       SELECT * 
+       FROM order_items i
+       JOIN order_item_notes n
+       ON i.order_id = n.order_id AND i.product_id = n.product_id;
+
+### Natural Joins
+* not recommended, sometimes it produce unexpected results.
+* the engine expect the join columns.
+
+       SELECT o.order_id, c.first_name
+       FROM orders o
+       NATURAL JOIN customers c;
+
+       -- same as
+
+       SELECT o.order_id, c.first_name
+       FROM orders o
+       JOIN customers c
+       ON o.customer_id = c.customer_id;
+
+### Cross Joins
+* every record from each table are combined with all records from the other table.
+* so no need for condition or any columns to join.
+* the actual example when you have table of sizes (small, medium, large) and table of colors.
+
+* **explicit syntax**
+
+       SELECT c.first_name AS customer, p.name AS product
+       FROM customers c
+       CROSS JOIN products p;
+
+* **implicit syntax**
+
+       SELECT c.first_name AS customer, p.name AS product
+       FROM customers c, products p;
+
+### Unions
+
+
+
+
+
 
 
 
