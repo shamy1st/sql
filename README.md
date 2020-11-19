@@ -373,7 +373,7 @@ LIKE     | Search for a pattern
        VALUES (LAST_INSERT_ID(), 1, 1, 2.95),
                  (LAST_INSERT_ID(), 2, 1, 3.95);
 
-### Copy Table Data to Another
+### Copy Table Data to Another Table
 
        CREATE TABLE orders_archived AS
        SELECT * FROM orders;
@@ -381,6 +381,53 @@ LIKE     | Search for a pattern
        CREATE TABLE orders_archived
        SELECT * FROM orders
        WHERE order_date < '2019-01-01';
+
+### UPDATE
+
+* **single record**
+
+       UPDATE invoices
+       SET payment_total = 10, payment_date = '2019-03-01'
+       WHERE invoice_id = 1;
+       
+       UPDATE invoices
+       SET payment_total = invoice_total * 0.5, payment_date = due_date
+       WHERE invoice_id = 3;
+
+* **multiple records**
+
+       UPDATE invoices
+       SET payment_total = invoice_total * 0.5, payment_date = due_date
+       WHERE client_id = 3;
+
+       UPDATE customers
+       SET points = points * 1.5
+       WHERE birth_date > '1990-01-01';
+
+* **using subqueries in updates**
+
+       UPDATE invoices
+       SET payment_total = invoice_total * 0.5, payment_date = due_date
+       WHERE client_id = (SELECT client_id FROM clients WHERE name = 'Myworks');
+
+       UPDATE invoices
+       SET payment_total = invoice_total * 0.5, payment_date = due_date
+       WHERE client_id IN (SELECT client_id FROM clients WHERE state IN ('CA', 'NY'));
+
+### DELETE Rows
+
+       DELETE FROM invoices
+       WHERE invoice_id = 1;
+
+       DELETE FROM invoices
+       WHERE client_id = (SELECT client_id FROM clients WHERE name = 'Myworks');
+
+### Restoring the Databases
+* run the script create-databases.sql which drops all tables and recreate them again.
+
+
+
+
 
 
 
