@@ -303,12 +303,26 @@ LIKE     | Search for a pattern
        FROM customers c, products p;
 
 ### Unions
+* the columns should be the same
+
+       SELECT first_name FROM customers
+       UNION
+       SELECT name FROM shippers;
 
 
+       SELECT order_id, order_date, 'Active' AS status
+       FROM sql_store.orders
+       WHERE order_date >= '2019-01-01'
 
+       UNION
 
+       SELECT order_id, order_date, 'Archived' AS status
+       FROM sql_store.orders
+       WHERE order_date < '2019-01-01';
 
+## Inserting, Updating, and Deleting Data
 
+### Column Attributes
 
 
 
