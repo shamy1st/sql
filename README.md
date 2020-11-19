@@ -324,7 +324,41 @@ LIKE     | Search for a pattern
 
 ### Column Attributes
 
+* **VARCHAR vs CHAR** varchar is variable length and store only used length, but char is fixed length.
 
+### INSERT
+
+* **with all columns**
+
+       INSERT INTO customers
+       VALUES (
+              DEFAULT, 
+              'John', 
+              'Smith', 
+              '1990-01-01',
+              NULL,
+              'address',
+              'city',
+              'CA',
+              DEFAULT);
+
+* **specify columns**
+
+       INSERT INTO customers (
+              first_name,
+              last_name,
+              birth_date,
+              address,
+              city,
+              state
+       )
+       VALUES (
+              'John', 
+              'Smith', 
+              '1990-01-01'
+              'address',
+              'city',
+              'CA');
 
 
 
