@@ -373,10 +373,14 @@ LIKE     | Search for a pattern
        VALUES (LAST_INSERT_ID(), 1, 1, 2.95),
                  (LAST_INSERT_ID(), 2, 1, 3.95);
 
-### Copy Table
+### Copy Table Data to Another
 
+       CREATE TABLE orders_archived AS
+       SELECT * FROM orders;
 
-
+       CREATE TABLE orders_archived
+       SELECT * FROM orders
+       WHERE order_date < '2019-01-01';
 
 
 
