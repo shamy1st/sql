@@ -463,6 +463,34 @@ operate only on non NULL values, so if you have null value it will not be includ
        -- count distinct number of clients
        SELECT COUNT(DISTINCT client_id) AS client_records FROM invoices;
 
+### GROUP BY
+
+* **single column**
+
+       -- total sales for each client
+       SELECT client_id, SUM(invoice_total) AS total_sales 
+       FROM invoices
+       WHERE invoice_date >= '2019-07-01'
+       GROUP BY client_id
+       ORDER BY total_sales DESC;
+
+* **multiple columns**
+
+       SELECT c.state, c.city, SUM(i.invoice_total) AS total_sales 
+       FROM invoices i
+       JOIN clients c USING (client_id)
+       GROUP BY c.state, c.city;
+
+### HAVING
+
+
+
+
+
+
+
+
+
 
 
 
