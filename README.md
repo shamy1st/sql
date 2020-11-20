@@ -609,6 +609,58 @@ should give the query which represent a table an alias like 'invoice_summary'
        ) AS invoice_summary;
 
 
+## Essential MySQL Functions
+
+### Numeric Functions
+https://dev.mysql.com/doc/refman/8.0/en/numeric-functions.html
+
+* **ROUND()**
+
+       -- return 5.74
+       SELECT ROUND(5.7367, 2);
+
+* **TRUNCATE()**
+
+       -- return 5.73
+       SELECT TRUNCATE(5.7367, 2);
+
+* **CEILING()**
+
+       -- return 6
+       SELECT CEILING(5.1);
+
+* **FLOOR()**
+
+       -- return 5
+       SELECT FLOOR(5.8);
+
+* **ABS()**
+
+       -- absolute value, return 5.3
+       SELECT ABS(-5.3);
+
+* **RAND()**
+
+       -- generate random value from 0 to 1
+       SELECT RAND();
+
+### 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
