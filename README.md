@@ -482,7 +482,34 @@ operate only on non NULL values, so if you have null value it will not be includ
        GROUP BY c.state, c.city;
 
 ### HAVING
+you can't use columns that not included in the select clause
 
+       SELECT client_id, SUM(invoice_total) AS total_sales 
+       FROM invoices
+       GROUP BY client_id
+       HAVING total_sales > 500;
+
+       SELECT client_id, SUM(invoice_total) AS total_sales, COUNT(*) AS number_of_invoices 
+       FROM invoices
+       GROUP BY client_id
+       HAVING total_sales > 500 AND number_of_invoices > 5;
+
+       -- customers located in virginia and spent more than $100
+       SELECT c.customer_id, c.first_name, c.last_name, c.state, SUM(i.quantity * i.unit_price) AS total_payment
+       FROM customers c
+       JOIN orders o USING (customer_id)
+       JOIN order_items i USING (order_id)
+       WHERE c.state = 'VA'
+       GROUP BY c.customer_id
+       HAVING total_payment > 100;
+
+### ROLLUP
+only available in MYSQL
+
+       -- sum the total of sums in a separate row
+       SELECT client_id, SUM(invoice_total) AS total_sales 
+       FROM invoices
+       GROUP BY client_id WITH ROLLUP
 
 
 
