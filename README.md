@@ -524,7 +524,7 @@ only available in MYSQL
        SELECT * FROM employees 
        WHERE salary > (SELECT AVG(salary) FROM employees);
 
-### IN
+### IN Operator
 
        -- all products not ordered before
        SELECT * FROM products
@@ -557,6 +557,67 @@ only available in MYSQL
        WHERE invoice_total > ALL (SELECT invoice_total FROM invoices WHERE client_id = 3);
 
 ### ANY keyword
+'= ANY' same as 'IN' keyword 
+
+       -- clients with at least two invoices
+       SELECT * FROM clients
+       WHERE client_id IN (SELECT client_id FROM invoices GROUP BY client_id HAVING COUNT(*) > 1);
+
+       -- clients with at least two invoices using ANY keywor
+       SELECT * FROM clients
+       WHERE client_id = ANY (SELECT client_id FROM invoices GROUP BY client_id HAVING COUNT(*) > 1);
+
+### Correlated Subqueries
+
+       -- employees whose salary is above the average in their offices
+       SELECT * 
+       FROM employees e
+       WHERE salary > (
+              SELECT AVG(salary) 
+              FROM employees
+              WHERE office_id = e.office_id
+       );
+
+### EXISTS Operator
+more efficient than 'IN' operator
+
+       -- clients that have an invoice
+       SELECT * FROM clients
+       WHERE client_id IN (SELECT DISTINCT client_id FROM invoices);
+
+       -- clients that have an invoice using EXISTS
+       SELECT * FROM clients c
+       WHERE EXISTS (SELECT client_id FROM invoices WHERE client_id = c.client_id);
+
+### Subqueries in the SELECT Clause
+
+       SELECT invoice_id, 
+              invoice_total,
+              (SELECT AVG(invoice_total) FROM invoices) AS invoice_average,
+              invoice_total - (SELECT invoice_average) AS difference
+       FROM invoices;
+
+### Subqueries in the FROM Clause
+should give the query which represent a table an alias like 'invoice_summary'
+
+       SELECT * FROM (
+              SELECT invoice_id, 
+                     invoice_total,
+                     (SELECT AVG(invoice_total) FROM invoices) AS invoice_average,
+                     invoice_total - (SELECT invoice_average) AS difference
+              FROM invoices
+       ) AS invoice_summary;
+
+
+
+
+
+
+
+
+
+
+
 
 
 
