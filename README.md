@@ -644,7 +644,90 @@ https://dev.mysql.com/doc/refman/8.0/en/numeric-functions.html
        -- generate random value from 0 to 1
        SELECT RAND();
 
-### 
+### String Functions
+https://dev.mysql.com/doc/refman/8.0/en/string-functions.html
+
+* **LENGTH()**
+
+       -- return 3
+       SELECT LENGTH('sky');
+
+* **UPPER()**
+
+       -- uppercase, return SKY
+       SELECT UPPER('sky');
+
+* **LOWER()**
+
+       -- lowercase, return sea
+       SELECT LOWER('SEA');
+
+* **LTRIM()**
+
+       -- left trim, return 'hello'
+       SELECT LTRIM('  hello  ');
+
+* **RTRIM()**
+
+       -- right trim, return 'hello'
+       SELECT RTRIM('hello  ');
+
+* **TRIM()**
+
+       -- return 'hello'
+       SELECT TRIM('  hello  ');
+
+* **LEFT()**
+
+       -- return 'fant'
+       SELECT LEFT('fantastic', 4);
+
+* **RIGHT()**
+
+       -- return 'stic'
+       SELECT RIGHT('fantastic', 4);
+
+* **SUBSTRING()**
+
+       -- start position (count from 1), length of substring (optional, without it then to the end), return 'ant'
+       SELECT SUBSTRING('fantastic', 2, 3);
+
+* **LOCATE()**
+
+       -- search about substring and return position (count from 1), return 5
+       -- return 0 if not found
+       SELECT LOCATE('ast', 'fantastic');
+
+* **REPLACE()**
+
+       -- replace 'ant' with 'and', return 'fandastic'
+       SELECT REPLACE('fantastic', 'ant', 'and');
+
+* **CONCAT()**
+
+       -- return 'startend'
+       SELECT CONCAT('start', 'end');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
