@@ -512,8 +512,51 @@ only available in MYSQL
        GROUP BY client_id WITH ROLLUP
 
 
+## Writing Complex Query
 
+### Subqueries
 
+       -- products more expensive than product 3
+       SELECT * FROM products
+       WHERE unit_price > (SELECT unit_price FROM products WHERE product_id = 3);
+
+       -- employees earn more than average
+       SELECT * FROM employees 
+       WHERE salary > (SELECT AVG(salary) FROM employees);
+
+### IN
+
+       -- all products not ordered before
+       SELECT * FROM products
+       WHERE product_id NOT IN (SELECT DISTINCT product_id FROM order_items);
+
+       -- client without invoices
+       SELECT * FROM clients
+       WHERE client_id NOT IN (SELECT DISTINCT client_id FROM invoices);
+
+## Subqueries vs Joins
+
+       -- client without invoices using subquery
+       SELECT * FROM clients
+       WHERE client_id NOT IN (SELECT DISTINCT client_id FROM invoices);
+
+       -- client without invoices using join
+       SELECT * 
+       FROM clients c
+       LEFT JOIN invoices i USING (client_id)
+       WHERE invoice_id IS NULL;
+
+### ALL keyword
+
+       -- all invoices larger than all invoices of customer 3
+       SELECT * FROM invoices
+       WHERE invoice_total > (SELECT MAX(invoice_total) FROM invoices WHERE client_id = 3);
+
+       -- all invoices larger than all invoices of customer 3 - using ALL keyword
+       SELECT * FROM invoices
+       WHERE invoice_total > ALL (SELECT invoice_total FROM invoices WHERE client_id = 3);
+
+### ANY keyword
 
 
 
