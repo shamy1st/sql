@@ -426,9 +426,41 @@ LIKE     | Search for a pattern
 * run the script create-databases.sql which drops all tables and recreate them again.
 
 
+## Summarizing Data
 
+### Aggregate Functions
+operate only on non NULL values, so if you have null value it will not be included in these functions.
 
+* MAX()
 
+       SELECT MAX(invoice_total) AS maximum FROM invoices;
+       SELECT MAX(payment_date) AS latest_date FROM invoices;
+
+* MIN()
+
+       SELECT MIN(invoice_total) AS minimum FROM invoices;
+       SELECT MIN(payment_date) AS oldest_date FROM invoices;
+
+* AVG()
+
+       SELECT AVG(invoice_total) AS average FROM invoices;
+
+* SUM()
+
+       SELECT SUM(invoice_total) AS summation FROM invoices;
+       -- multiply each value by 1.1 then apply sum
+       SELECT SUM(invoice_total * 1.1) AS summation FROM invoices;
+       -- sum all values then multiply by 1.1
+       SELECT SUM(invoice_total) * 1.1 AS summation FROM invoices;
+
+* COUNT()
+
+       -- if null records it will not count
+       SELECT COUNT(invoice_total) AS counter FROM invoices;
+       -- the actual total records of table
+       SELECT COUNT(*) AS total_records FROM invoices;
+       -- count distinct number of clients
+       SELECT COUNT(DISTINCT client_id) AS client_records FROM invoices;
 
 
 
