@@ -708,6 +708,87 @@ https://dev.mysql.com/doc/refman/8.0/en/string-functions.html
        -- return 'startend'
        SELECT CONCAT('start', 'end');
 
+### Date Functions
+https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html
+
+* **NOW()**
+
+       -- return '2020-11-20 20:25:13'
+       SELECT NOW();
+
+* **CURDATE()**
+
+       -- return '2020-11-20'
+       SELECT CURDATE();
+
+* **CURTIME()**
+
+       -- return '20:27:10'
+       SELECT CURTIME();
+
+* **YEAR() MONTH() DAY() HOUR() MINUTE() SECOND()**
+
+       -- return '2020'
+       SELECT YEAR(NOW());
+
+* **DAYNAME() MONTHNAME()**
+
+       -- return 'Friday'
+       SELECT DAYNAME(NOW());
+
+* **EXTRACT(... FROM ...) YEAR, MONTH, DAY**
+
+       -- return '2020'
+       SELECT EXTRACT(YEAR FROM NOW());
+
+### Formatting Dates and Times
+https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_date-format
+
+       -- %y -> two digit year, %Y -> 4 digit year
+       -- %m -> two digit month, %M -> month name
+       -- %d -> two digit day, %D -> 20th
+       SELECT DATE_FORMAT(NOW(), '%M %d, %Y');
+
+       -- return '20:46 PM'
+       SELECT TIME_FORMAT(NOW(), '%H:%i %p');
+
+### Calculating Dates and Times
+
+* **ADD, SUB**
+
+       -- add 1 day to now, return '2020-11-21 20:48:17'
+       SELECT DATE_ADD(NOW(), INTERVAL 1 DAY);
+       
+       -- subtract 1 day to now, return '2020-11-19 20:50:12'
+       SELECT DATE_SUB(NOW(), INTERVAL 1 DAY);
+
+       -- add 1 year to now, return '2021-11-20 20:49:16'
+       SELECT DATE_ADD(NOW(), INTERVAL 1 YEAR);
+
+       -- subtract 1 year to now, return '2019-11-20 20:50:46'
+       SELECT DATE_SUB(NOW(), INTERVAL 1 YEAR);
+
+* **DIFF**
+
+       -- return 4
+       SELECT DATEDIFF('2020-01-05', '2020-01-01');
+
+       -- TIME_TO_SEC(): number of sec since mid-night
+       SELECT TIME_TO_SEC('09:00') - TIME_TO_SEC('08:59');
+
+### IFNULL and COALESCE Functions
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
