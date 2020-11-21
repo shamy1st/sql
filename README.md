@@ -834,6 +834,88 @@ https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_da
        FROM customers;
 
 
+## Views
+
+### Creating Views
+
+       CREATE OR REPLACE VIEW sales_by_client AS
+       SELECT c.client_id, c.name, SUM(i.invoice_total) AS total_sales
+       FROM clients c
+       JOIN invoices i USING (client_id)
+       GROUP BY client_id
+       WITH CHECK OPTION;
+
+       SELECT * FROM sales_by_client;
+
+### Altering or Dropping Views
+
+       DROP VIEW sales_by_client;
+
+       -- edit
+       CREATE OR REPLACE VIEW sales_by_client AS
+       SELECT c.client_id, c.name, SUM(i.invoice_total) AS total_sales
+       FROM clients c
+       JOIN invoices i USING (client_id)
+       GROUP BY client_id
+       WITH CHECK OPTION;
+
+### Updatable Views
+if you don't have the following keywords in your view query then you can delete, update, insert
+* DISTINCT
+* Aggregate Function (MIN, MAX, SUM, AVG, ...)
+* GROUP BY / HAVING
+* UNION
+
+       DELETE FROM invoices_with_balance WHERE invoice_id = 1;
+       
+       UPDATE invoices_with_balance SET due_date = DATE_ADD(due_date, INTERVAL 2 DAY) WHERE invoice_id = 2;
+
+       INSERT (little bit tricky)
+
+### WITH OPTION CHECK Clause
+
+       -- the row with invoice_id = 2, will be discarded after run this update
+       UPDATE invoices_with_balance SET payment_total = invoice_total WHERE invoice_id = 2;
+
+       -- add 'WITH CHECK OPTION' at the end of the query
+       -- if something happen as previous update, error will be shown in console without discard row.
+       CREATE OR REPLACE VIEW invoices_with_balance AS
+       SELECT 
+           invoice_id,
+           number,
+           client_id,
+           invoice_total,
+           payment_total,
+           invoice_total - payment_total AS balance,
+           invoice_date,
+           due_date,
+           payment_date
+       FROM invoices
+       WHERE (invoice_total - payment_total) > 0
+       WITH CHECK OPTION;
+
+
+## Stored Procedures
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
