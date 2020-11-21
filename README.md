@@ -1048,7 +1048,7 @@ if you don't have the following keywords in your view query then you can delete,
        DELIMITER $$
        CREATE PROCEDURE get_risk_factor()
        BEGIN
-              DECLARE risk_factor DECIMAL(9,2) DEFAULT 0;
+           DECLARE risk_factor DECIMAL(9,2) DEFAULT 0;
            DECLARE invoices_total DECIMAL(9,2);
            DECLARE invoices_count INT;
 
@@ -1064,7 +1064,16 @@ if you don't have the following keywords in your view query then you can delete,
 
        CALL get_risk_factor();
 
-### Functions
+
+## Functions
+custom function with single return value like MIN(), MAX(), SUM(), ...
+
+### CREATE Function
+
+* **Attributes**: the function at least have one attribute
+       * **DETERMINISTIC**: for the same input return the same output.
+       * **READS SQL DATA**: use select statements.
+       * **MODIFIES SQL DATA**: use modify statements (update, delete, drop, ...).
 
 
 
