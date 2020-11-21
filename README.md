@@ -1103,6 +1103,26 @@ custom function with single return value like MIN(), MAX(), SUM(), ...
 
 ## Triggers and Events
 
+### Trigger
+
+* **Trigger** is a block of code that automatically executed before or after an insert, update or delete statement.
+* you can trigger any table except the changed table.
+
+       DROP TRIGGER IF EXISTS payments_after_insert;
+
+       DELIMITER $$
+       CREATE TRIGGER payments_after_insert
+       AFTER INSERT ON payments
+       FOR EACh ROW
+       BEGIN
+              UPDATE invoices
+           SET payment_total = payment_total + NEW.amount
+           WHERE invoice_id = NEW.invoice_id;
+       END$$
+       DELIMITER ;
+
+       INSERT INTO payments VALUES (DEFAULT,5,3,'2019-01-01',10,1);
+       SELECT * FROM invoices WHERE invoice_id = 3;
 
 
 ## Transactions and Concurrency
