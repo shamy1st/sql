@@ -982,7 +982,7 @@ if you don't have the following keywords in your view query then you can delete,
        CALL sql_invoicing.get_payments(5, 2);
 
 ### Parameter Validation
-https://www.ibm.com/support/knowledgecenter/SSEPEK_11.0.0/codes/src/tpc/db2z_sqlstatevalues.html
+[SQLSTATE VALUES](https://www.ibm.com/support/knowledgecenter/SSEPEK_11.0.0/codes/src/tpc/db2z_sqlstatevalues.html)
 
        DROP PROCEDURE IF EXISTS update_invoice;
 
