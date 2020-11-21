@@ -1071,9 +1071,10 @@ custom function with single return value like MIN(), MAX(), SUM(), ...
 ### CREATE Function
 
 * **Attributes**: the function at least have one attribute
-       * **DETERMINISTIC**: for the same input return the same output.
-       * **READS SQL DATA**: use select statements.
-       * **MODIFIES SQL DATA**: use modify statements (update, delete, drop, ...).
+
+    * **DETERMINISTIC**: for the same input return the same output.
+    * **READS SQL DATA**: use select statements.
+    * **MODIFIES SQL DATA**: use modify statements (update, delete, drop, ...).
 
 
 
