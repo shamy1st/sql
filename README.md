@@ -908,23 +908,104 @@ if you don't have the following keywords in your view query then you can delete,
 
        CALL sql_invoicing.get_clients();
 
+### Dropping Stored Procedures
 
+       DROP PROCEDURE IF EXISTS get_clients;
 
+### Template for Git
 
+       DROP PROCEDURE IF EXISTS get_clients;
 
+       DELIMITER $$
+       CREATE PROCEDURE get_clients()
+       BEGIN
+              SELECT * FROM clients;
+       END$$
+       DELIMITER ;
 
+### Parameters
 
+       DROP PROCEDURE IF EXISTS get_clients_by_state;
 
+       DELIMITER $$
+       CREATE PROCEDURE get_clients_by_state(state CHAR(2))
+       BEGIN
+              SELECT * FROM clients c WHERE c.state = state;
+       END$$
+       DELIMITER ;
 
+       CALL sql_invoicing.get_clients_by_state('CA');
 
+       --
 
+       DROP PROCEDURE IF EXISTS get_invoices_by_client;
 
+       DELIMITER $$
+       CREATE PROCEDURE get_invoices_by_client(client_id INT)
+       BEGIN
+              SELECT * FROM invoices i WHERE i.client_id = client_id;
+       END$$
+       DELIMITER ;
 
+       CALL sql_invoicing.get_invoices_by_client(5);
 
+### Parameters with Default Value
 
+       DROP PROCEDURE IF EXISTS get_clients_by_state;
 
+       DELIMITER $$
+       CREATE PROCEDURE get_clients_by_state(state CHAR(2))
+       BEGIN
+              SELECT * FROM clients c WHERE c.state = IFNULL(state, c.state);
+       END$$
+       DELIMITER ;
 
+       CALL sql_invoicing.get_clients_by_state(NULL);
 
+       --
+
+       DROP PROCEDURE IF EXISTS get_payments;
+
+       DELIMITER $$
+       CREATE PROCEDURE get_payments(
+       client_id INT,
+       payment_method_id TINYINT
+       )
+       BEGIN
+              SELECT * 
+           FROM payments p 
+           WHERE p.client_id = IFNULL(client_id, p.client_id) AND 
+                       p.payment_method = IFNULL(payment_method_id, p.payment_method);
+       END$$
+       DELIMITER ;
+
+       CALL sql_invoicing.get_payments(5, 2);
+
+### Parameter Validation
+https://www.ibm.com/support/knowledgecenter/SSEPEK_11.0.0/codes/src/tpc/db2z_sqlstatevalues.html
+
+       DROP PROCEDURE IF EXISTS update_invoice;
+
+       DELIMITER $$
+       CREATE PROCEDURE update_invoice(
+              invoice_id INT,
+              payment_total DECIMAL(9,2),
+              payment_date DATE
+       )
+       BEGIN
+              IF payment_total <= 0 THEN
+                     SIGNAL SQLSTATE '22003' SET MESSAGE_TEXT = 'Invalid payment_total!';
+              END IF;
+
+              UPDATE invoices i 
+              SET i.payment_total = payment_total, i.payment_date = payment_date
+              WHERE i.invoice_id = invoice_id;
+       END$$
+       DELIMITER ;
+
+       CALL sql_invoicing.update_invoice(2, -100, '2019-01-01');
+
+### Output Parameters
 
 
 
