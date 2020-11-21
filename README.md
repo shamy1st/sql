@@ -778,6 +778,89 @@ https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_da
 
 ### IFNULL and COALESCE Functions
 
+* **IFNULL()**
+
+       SELECT 
+              order_id, 
+              IFNULL(shipper_id, 'Not assigned') AS shipper
+       FROM orders;
+
+* **COALESCE()**
+
+       -- COALESCE: if shipper_id is null return comments and if comments null return 'Not assigned'
+       SELECT 
+              order_id, 
+              COALESCE(shipper_id, comments, 'Not assigned') AS shipper
+       FROM orders;
+
+### IF Function
+
+       SELECT
+           order_id,
+           order_date,
+           IF(YEAR(order_date) = YEAR(NOW()), 'Active', 'Archived') AS status
+       FROM orders;
+       
+       SELECT 
+              p.product_id, 
+              p.name, 
+              COUNT(*) AS orders, 
+              IF(COUNT(*) = 1, 'Once', 'Many Times') AS frequency
+       FROM products p
+       JOIN order_items i USING (product_id)
+       GROUP BY product_id;       
+
+### CASE Operator
+
+       SELECT
+           order_id,
+           order_date,
+           CASE
+               WHEN YEAR(order_date) = YEAR(NOW()) THEN 'Active'
+               WHEN YEAR(order_date) = YEAR(NOW()) - 1 THEN 'Last Year'
+               WHEN YEAR(order_date) < YEAR(NOW()) - 1 THEN 'Archived'
+               ELSE 'Future'
+           END AS category
+       FROM orders;
+
+       SELECT
+           CONCAT(first_name, ' ', last_name) AS customer,
+           points,
+           CASE
+               WHEN points > 3000 THEN 'Gold'
+               WHEN points >= 2000 THEN 'Silver'
+               ELSE 'Bronze'
+           END AS category
+       FROM customers;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
