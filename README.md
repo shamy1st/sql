@@ -1100,8 +1100,20 @@ custom function with single return value like MIN(), MAX(), SUM(), ...
 
               SELECT client_id, name, get_risk_factor_for_client(client_id) AS risk_factor FROM clients;
 
-### Other Conventions
 
+## Triggers and Events
+
+
+
+## Transactions and Concurrency
+
+
+
+## Data Types
+
+
+
+## Designing Databases
 
 
 
