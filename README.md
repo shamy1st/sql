@@ -1142,6 +1142,52 @@ custom function with single return value like MIN(), MAX(), SUM(), ...
        DELETE FROM payments WHERE payment_id = 9;
        SELECT * FROM invoices WHERE invoice_id = 3;
 
+* **View Triggers**
+
+       SHOW TRIGGERS;
+
+* **Dropping Trigger**
+
+       DROP TRIGGER IF EXISTS payments_after_delete;
+
+* **Using Triggers for Auditing** create payments_audit table and each trigger insert row (insert, delete, update, ...)
+
+### Event
+
+* **Event**: is a task or (block of SQL code) executed according to a schedule.
+
+       -- all mysql system variables
+       SHOW VARIABLES;
+
+       -- for event_scheduler system variable
+       SHOW VARIABLES LIKE 'event%';
+       -- set event_scheduler = ON
+       SET GLOBAL event_scheduler = ON;
+
+* **Create Event**
+
+       DROP EVENT IF EXISTS yearly_delete_audit_rows;
+
+       DELIMITER $$
+       CREATE EVENT yearly_delete_audit_rows
+       ON SCHEDULE
+              -- AT '2019-05-01'
+           EVERY 1 YEAR STARTS '2021-01-01' ENDS '2029-01-01'
+       DO BEGIN
+              DELETE FROM payments_audit
+           WHERE action_date < Now() - INTERVAL 1 YEAR;
+       END$$
+       DELIMITER ;
+
+* **View Events**
+
+       SHOW EVENTS;
+
+* **Enable/Disable Event**
+
+       ALTER EVENT yearly_delete_audit_rows DISABLE;
+       ALTER EVENT yearly_delete_audit_rows ENABLE;
+
 
 ## Transactions and Concurrency
 
