@@ -983,8 +983,9 @@ if you don't have the following keywords in your view query then you can delete,
 
 ### Parameter Validation
 
-* [SQLSTATE VALUES](https://www.ibm.com/support/knowledgecenter/SSEPEK_11.0.0/codes/src/tpc/db2z_sqlstatevalues.html)
-       * **22003**: A numeric value is out of range.
+[SQLSTATE VALUES](https://www.ibm.com/support/knowledgecenter/SSEPEK_11.0.0/codes/src/tpc/db2z_sqlstatevalues.html)
+
+* **22003**: A numeric value is out of range.
 
        DROP PROCEDURE IF EXISTS update_invoice;
 
