@@ -897,9 +897,16 @@ if you don't have the following keywords in your view query then you can delete,
 
 ## Stored Procedures
 
+### Creating a Stored Procedure
 
+       DELIMITER $$
+       CREATE PROCEDURE get_clients()
+       BEGIN
+              SELECT * FROM clients;
+       END$$
+       DELIMITER ;
 
-
+       CALL sql_invoicing.get_clients();
 
 
 
