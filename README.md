@@ -1115,13 +1115,31 @@ custom function with single return value like MIN(), MAX(), SUM(), ...
        AFTER INSERT ON payments
        FOR EACh ROW
        BEGIN
-              UPDATE invoices
+           UPDATE invoices
            SET payment_total = payment_total + NEW.amount
            WHERE invoice_id = NEW.invoice_id;
        END$$
        DELIMITER ;
 
        INSERT INTO payments VALUES (DEFAULT,5,3,'2019-01-01',10,1);
+       SELECT * FROM invoices WHERE invoice_id = 3;
+
+       --
+
+       DROP TRIGGER IF EXISTS payments_after_delete;
+
+       DELIMITER $$
+       CREATE TRIGGER payments_after_delete
+       AFTER DELETE ON payments
+       FOR EACh ROW
+       BEGIN
+              UPDATE invoices
+           SET payment_total = payment_total - OLD.amount
+           WHERE invoice_id = OLD.invoice_id;
+       END$$
+       DELIMITER ;
+
+       DELETE FROM payments WHERE payment_id = 9;
        SELECT * FROM invoices WHERE invoice_id = 3;
 
 
