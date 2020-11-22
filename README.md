@@ -1217,29 +1217,27 @@ mysql wrap (insert, update, delete) statements in transaction and autocommit it.
        SHOW VARIABLES LIKE 'autocommit%';
 
 ### Concurrency and Lockign
+If two transactions update the same row, mysql lock the row for the second one and wait unitl first one finish.
 
 ### Concurrency Problems
 
-1. **LOST UPDATES**
+1. **LOST UPDATES** (two transactions update the same row)
 ![](https://github.com/shamy1st/sql/blob/main/images/lost-updates.png)
 
-
-
-2. **DIRTY READS**
+2. **DIRTY READS** (read uncommitted data)
 ![](https://github.com/shamy1st/sql/blob/main/images/dirty-reads-1.png)
 ![](https://github.com/shamy1st/sql/blob/main/images/dirty-reads-2.png)
 
-
-
-3. **NON-REPEATING**
+3. **NON-REPEATING READS** (read the same data in the same transaction with different results)
 ![](https://github.com/shamy1st/sql/blob/main/images/non-repeating-1.png)
 ![](https://github.com/shamy1st/sql/blob/main/images/non-repeating-2.png)
 
-
-
-4. **PHANTOM READS**
+4. **PHANTOM READS** (miss one or more row in our query, because another transaction update it [ghost])
 ![](https://github.com/shamy1st/sql/blob/main/images/phantom-reads-1.png)
 ![](https://github.com/shamy1st/sql/blob/main/images/phantom-reads-2.png)
+
+### Transaction Isolation Levels
+![](https://github.com/shamy1st/sql/blob/main/images/transaction-isolation-levels.png)
 
 
 
