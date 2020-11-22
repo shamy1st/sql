@@ -1191,6 +1191,56 @@ custom function with single return value like MIN(), MAX(), SUM(), ...
 
 ## Transactions and Concurrency
 
+### Transaction
+
+* **Transaction** is a group of SQL statements that represent a single unit of work.
+
+* **ACID Properties**
+  * **ATOMICITY** like atom is unbreakable.
+  * **CONSISTENCY** data must be at consistent state.
+  * **ISOLATION** each transaction isolated from each other.
+  * **Durability** once it is committed, changes will be permanent.
+  
+* **Create Transaction**
+
+       START TRANSACTION;
+
+       INSERT INTO orders VALUES (DEFAULT,1,'2019-01-01',1,NULL,NULL,NULL);
+
+       INSERT INTO `order_items` VALUES (LAST_INSERT_ID(),1,1,1);
+
+       COMMIT;
+
+* **autocommit**
+mysql wrap (insert, update, delete) statements in transaction and autocommit it. autocommit variable is ON by default.
+
+       SHOW VARIABLES LIKE 'autocommit%';
+
+### Concurrency and Lockign
+
+### Concurrency Problems
+
+1. **LOST UPDATES**
+![](https://github.com/shamy1st/sql/blob/main/images/lost-updates.png)
+
+
+
+2. **DIRTY READS**
+![](https://github.com/shamy1st/sql/blob/main/images/dirty-reads-1.png)
+![](https://github.com/shamy1st/sql/blob/main/images/dirty-reads-2.png)
+
+
+
+3. **NON-REPEATING**
+![](https://github.com/shamy1st/sql/blob/main/images/non-repeating-1.png)
+![](https://github.com/shamy1st/sql/blob/main/images/non-repeating-2.png)
+
+
+
+4. **PHANTOM READS**
+![](https://github.com/shamy1st/sql/blob/main/images/phantom-reads-1.png)
+![](https://github.com/shamy1st/sql/blob/main/images/phantom-reads-2.png)
+
 
 
 ## Data Types
