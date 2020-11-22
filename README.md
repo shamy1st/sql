@@ -1268,7 +1268,7 @@ two transactions waiting each others to release the lock.
 [SQL Data Types for MySQL, SQL Server, MS Access](https://www.w3schools.com/sql/sql_datatypes.asp)
 
 ### String Type
-![](https://github.com/shamy1st/sql/blob/main/images/character_size.png)
+![](https://github.com/shamy1st/sql/blob/main/images/character-size.png)
 
 * **CHAR(x)**: fixed length
 * **VARCHAR(x)**: variable length, max length 65,535 characters (~64KB) [can be indexed]
