@@ -1237,6 +1237,7 @@ If two transactions update the same row, mysql lock the row for the second one a
 ![](https://github.com/shamy1st/sql/blob/main/images/phantom-reads-2.png)
 
 ### Transaction Isolation Levels
+mysql by default is set to **REPEATABLE READ**
 ![](https://github.com/shamy1st/sql/blob/main/images/transaction-isolation-levels.png)
 
 
