@@ -1331,7 +1331,10 @@ with JSON type you can save, edit properties, remove properties, show specific p
 
 
 ## Designing Databases
+https://github.com/shamy1st/database-modeling
 
 ## Indexing for High Performance
 
+
 ## Securing Databases
+
