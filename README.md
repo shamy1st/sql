@@ -1240,10 +1240,93 @@ If two transactions update the same row, mysql lock the row for the second one a
 mysql by default is set to **REPEATABLE READ**
 ![](https://github.com/shamy1st/sql/blob/main/images/transaction-isolation-levels.png)
 
+       -- by default transaction_isolation = REPEATABLE-READ
+       SHOW VARIABLES LIKE 'transaction_isolation';
+       
+       SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
+       SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
+       SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+       SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
 
+       -- SESSION: only for this session
+       SET SESSION TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+       
+       -- GLOBAL: for all upcoming transaction in the future
+       SET GLOBAL TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+
+* **Isolation Levels**
+1. READ UNCOMMITTED
+2. READ COMMITTED
+3. REPEATABLE READ
+4. SERIALIZABLE
+
+### DEADLOCK
+two transactions waiting each others to release the lock.
 
 ## Data Types
 
+[SQL Data Types for MySQL, SQL Server, MS Access](https://www.w3schools.com/sql/sql_datatypes.asp)
+
+### String Type
+
+* **CHAR(x)**: fixed length
+* **VARCHAR(x)**: variable length, max length 65,535 characters (~64KB) [can be indexed]
+  * VARCHAR(50): for short strings, like username, passwords.
+  * VARCHAR(255): for medium-length strings, like address
+* **MEDIUMTEXT**: max (16MB), good for JSON objects, medium length books
+* **LONGTEXT**: max (4GB), good for text books, log files
+* **TINTTEXT**: max 255 bytes
+* **TEXT**: max 64KB
+
+### Integer Type
+https://dev.mysql.com/doc/refman/8.0/en/integer-types.html
+
+* **TINYINT**: 1 Byte [-128, 127]
+* **UNSIGNED TINYINT**: [0, 255]
+* **SMALLINT**: 2 Bytes [-32K, 32K]
+* **MEDIUMINT**: 3 Bytes [-8M, 8M]
+* **INT**: 4 Bytes [-2B, 2B]
+* **BIGINT**: 8 Bytes [-9Z, 9Z]
+
+### Fixed-point and Floating-point Types
+
+* **DECIMAL(p, s)**: e.g. 1234567.89
+* **DEC**: synonym, exactly the same as DECIMAL(p, s)
+* **NUMERIC**: synonym, exactly the same as DECIMAL(p, s)
+* **FIXED**: synonym, exactly the same as DECIMAL(p, s)
+* **FLOAT**: 4 Bytes
+* **DOUBLE**: 8 Bytes
+
+### Boolean Type
+
+* **BOOL**: synonym to TINYINT
+* **BOOLEAN**: synonym to TINYINT
+
+### Enum and Set Types
+Bad feature don't use it!
+
+Enum('small', 'medium', 'large')
+
+SET(...)
+
+### Date and Time Types
+
+* **DATE**:
+* **TIME**:
+* **DATETIME**: 8 Bytes
+* **TIMESTAMP**: 4 Bytes (up to 2038)
+* **YEAR**:
+
+### Blob Type
+large amount of binary data like images, videos, pdf, ...
+
+* **TINYBLOB**: max 255 Bytes
+* **BLOB**: max 65 KB
+* **MEDIUMBLOB**: 16 MB
+* **LONGBLOB**: 4 GB
+
+### JSON Type
+with JSON type you can save, edit properties, remove properties, show specific property in JSON object.
 
 
 ## Designing Databases
