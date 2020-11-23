@@ -1362,10 +1362,86 @@ design indexes based on your queries, not your table.
 
 ### Prefix Indexes
 
+include only prefix of string column to be smaller and faster
+
+the optimal number is from your data see how many characters uniquely identify the column.
+
+for example here use **20**
+
+       CREATE INDEX idx_lastname ON customers (last_name(20));
+
+how to choose number?
+
+       SELECT COUNT(*) FROM customers;
+       -- increase second parameter of LEFT() method till you get unique values equal to the previous select.
+       SELECT COUNT(DISTINCT LEFT(last_name, 20)) FROM customers;
+
+### Full-text Index
+
+       -- to search about 'react redux' in my posts
+       -- big overhead to find this query
+       SELECT * FROM posts WHERE title LIKE '%react redux%' OR body LIKE '%react redux%';
+
+       -- more powerful solution fulltext index
+       -- generate a powerful search engine from the columns, ingonring stopping characters
+       CREATE FULLTEXT INDEX idx_title_body ON posts (title, body);
+       SELECT * FROM posts WHERE MATCH(title, body) AGAINST('react redux');
+       
+       -- in relevance mode
+       -- return ratio 0->1 how much the record relevant to the search?
+       SELECT * FROM posts WHERE MATCH(title, body) AGAINST('react redux');
+       
+       -- in boolean mode
+       SELECT * FROM posts WHERE MATCH(title, body) AGAINST('react redux' IN BOOLEAN MODE);
+       
+       -- use '+' , '-' to must include in result or ignore
+       -- here must include 'form' and you can ignore 'redux'
+       SELECT * FROM posts WHERE MATCH(title, body) AGAINST('react -redux +form' IN BOOLEAN MODE);
+       
+       -- for exact sentence surround by double-quote ""
+       SELECT * FROM posts WHERE MATCH(title, body) AGAINST('"handling a form"' IN BOOLEAN MODE);
+
+### Composite Indexes
+
+       -- if you have composite condition on two columns and these two columns have indexes
+       -- mysql will choose only one index in the query
+       EXPLAIN SELECT * FROM customers WHERE state = 'CA' AND points > 1000;
+
+       -- use composite index instead
+       CREATE INDEX idx_state_points ON customers (state, points);
+       EXPLAIN SELECT * FROM customers WHERE state = 'CA' AND points > 1000;
+       
+* **Order of Columns in Composite Index**
+
+  * **rule1**: put the most frequently used columns first.
+  * **rule2**: put the columns with high cardinality first (unique rows)
+  * **rule3**: take your queries into account.
+
+### Drop Index
+
+       DROP INDEX idx_state ON customers;
+
+### When Indexes are Ignored
+### Using Indexes for Sorting
+
+       -- show the cost of last query
+       SHOW STATUS LIKE 'last_query_cost';
+       
+       EXPLAIN SELECT customer_id FROM customers ORDER BY state;
+       
+       CREATE INDEX idx_state ON customers (state);
+       
+       EXPLAIN SELECT customer_id FROM customers ORDER BY state;
+       
+* **rule**: if you have index on two columns (a, b), you can sort on
+  * a
+  * a, b
+  * a DESC, b DESC
+  * can't mix the direction
+  * can't put column in the middle (a, c, b) -> result on full scan
 
 
-
-
+  
 
 ## Securing Databases
 
