@@ -1344,5 +1344,28 @@ design indexes based on your queries, not your table.
 ![](https://github.com/shamy1st/sql/blob/main/images/index-3.png)
 ![](https://github.com/shamy1st/sql/blob/main/images/index-cost.png)
 
+### Create Index
+
+       EXPLAIN SELECT * FROM customers WHERE state = 'CA';
+       
+       CREATE INDEX idx_state ON customers (state);
+       
+       EXPLAIN SELECT * FROM customers WHERE state = 'CA';
+
+### View Indexes
+
+       SHOW INDEXES IN customers;
+       ANALYZE TABLE customers; -- regenerate statistics in the show indexes
+
+* **PRIMARY** index also called **Clustered Index**.
+* **Secondary Index** foreign keys indexes and custom indexes.
+
+### Prefix Indexes
+
+
+
+
+
+
 ## Securing Databases
 
