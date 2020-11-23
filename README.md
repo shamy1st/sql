@@ -1342,6 +1342,7 @@ design indexes based on your queries, not your table.
 ![](https://github.com/shamy1st/sql/blob/main/images/index-1.png)
 ![](https://github.com/shamy1st/sql/blob/main/images/index-2.png)
 ![](https://github.com/shamy1st/sql/blob/main/images/index-3.png)
+![](https://github.com/shamy1st/sql/blob/main/images/index-cost.png)
 
 ## Securing Databases
 
