@@ -1335,6 +1335,13 @@ https://github.com/shamy1st/database-modeling
 
 ## Indexing for High Performance
 
+indexes speed up our queries.
+
+design indexes based on your queries, not your table.
+
+![](https://github.com/shamy1st/sql/blob/main/images/index-1.png)
+![](https://github.com/shamy1st/sql/blob/main/images/index-2.png)
+![](https://github.com/shamy1st/sql/blob/main/images/index-3.png)
 
 ## Securing Databases
 
