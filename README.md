@@ -1441,7 +1441,71 @@ how to choose number?
   * can't put column in the middle (a, c, b) -> result on full scan
 
 
-  
-
 ## Securing Databases
 
+### Create User
+
+       -- restrict user from specific domain 'hostname'
+       CREATE USER ahmed@'%.hostname' IDENTIFIED BY '1234';
+
+       -- from anywhere
+       CREATE USER ahmed IDENTIFIED BY '1234';
+
+### View Users
+
+       SELECT * FROM mysql.user;
+
+### Drop User
+
+       DROP USER ahmed@hostname;
+
+       DROP USER ahmed;
+
+### Change Password
+
+       SET PASSWORD FOR ahmed = '1234';
+       
+### Privileges
+https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html
+
+1. **web/desktop application**
+
+       CREATE USER my_app IDENTIFIED BY '1234';
+
+       -- for all tables
+       GRANT SELECT, INSERT, UPDATE, DELETE, EXECUTE
+       ON sql_store.* TO my_app;
+
+       -- for specific table
+       GRANT SELECT, INSERT, UPDATE, DELETE, EXECUTE
+       ON sql_store.tablename TO my_app;
+
+2. **admin**
+
+       CREATE USER ahmed IDENTIFIED BY '1234';
+
+       -- for all tables in sql_store schema
+       GRANT ALL ON sql_store.* TO ahmed;
+
+       -- access for all schemas, all tables
+       GRANT ALL ON *.* to ahmed;
+
+### View Privileges
+
+       -- current user
+       SHOW GRANTS;
+
+       -- specific user
+       SHOW GRANTS FOR ahmed;
+
+### Revoke Privileges
+
+       -- add privilege
+       GRANT CREATE VIEW
+       ON sql_store.*
+       TO my_app;
+
+       -- remove privilege
+       REVOKE CREATE VIEW
+       ON sql_store.*
+       FROM my_app;
