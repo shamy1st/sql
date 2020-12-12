@@ -1199,7 +1199,7 @@ custom function with single return value like MIN(), MAX(), SUM(), ...
   * **ATOMICITY** like atom is unbreakable.
   * **CONSISTENCY** data must be at consistent state.
   * **ISOLATION** each transaction isolated from each other.
-  * **Durability** once it is committed, changes will be permanent.
+  * **DURABILITY** once it is committed, changes will be permanent.
   
 * **Create Transaction**
 
